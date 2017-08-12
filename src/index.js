@@ -14,7 +14,7 @@ import Visual from "./visual.js"
     },
 
     animate : function(oldt, nowt) {
-        this.update(nowt, (nowt - oldt) * 0.001);
+        this.update(nowt * 0.001, (nowt - oldt) * 0.001);
         requestAnimationFrame(this.animate.bind(this, nowt));
     }
 })();

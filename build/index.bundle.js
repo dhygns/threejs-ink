@@ -69,22 +69,22 @@
 
 "use strict";
 /* unused harmony export WebGLRenderTargetCube */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return WebGLRenderTarget; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return WebGLRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return WebGLRenderTarget; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return WebGLRenderer; });
 /* unused harmony export ShaderLib */
 /* unused harmony export UniformsLib */
 /* unused harmony export UniformsUtils */
 /* unused harmony export ShaderChunk */
 /* unused harmony export FogExp2 */
 /* unused harmony export Fog */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return Scene; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return Scene; });
 /* unused harmony export LensFlare */
 /* unused harmony export Sprite */
 /* unused harmony export LOD */
 /* unused harmony export SkinnedMesh */
 /* unused harmony export Skeleton */
 /* unused harmony export Bone */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return Mesh; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Mesh; });
 /* unused harmony export LineSegments */
 /* unused harmony export LineLoop */
 /* unused harmony export Line */
@@ -245,7 +245,7 @@
 /* unused harmony export SphereBufferGeometry */
 /* unused harmony export RingGeometry */
 /* unused harmony export RingBufferGeometry */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return PlaneGeometry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return PlaneGeometry; });
 /* unused harmony export PlaneBufferGeometry */
 /* unused harmony export LatheGeometry */
 /* unused harmony export LatheBufferGeometry */
@@ -265,7 +265,7 @@
 /* unused harmony export ShadowMaterial */
 /* unused harmony export SpriteMaterial */
 /* unused harmony export RawShaderMaterial */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return ShaderMaterial; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return ShaderMaterial; });
 /* unused harmony export PointsMaterial */
 /* unused harmony export MeshPhysicalMaterial */
 /* unused harmony export MeshStandardMaterial */
@@ -274,7 +274,7 @@
 /* unused harmony export MeshNormalMaterial */
 /* unused harmony export MeshLambertMaterial */
 /* unused harmony export MeshDepthMaterial */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return MeshBasicMaterial; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return MeshBasicMaterial; });
 /* unused harmony export LineDashedMaterial */
 /* unused harmony export LineBasicMaterial */
 /* unused harmony export Material */
@@ -353,13 +353,13 @@
 /* unused harmony export SphericalReflectionMapping */
 /* unused harmony export CubeUVReflectionMapping */
 /* unused harmony export CubeUVRefractionMapping */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return RepeatWrapping; });
-/* unused harmony export ClampToEdgeWrapping */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return RepeatWrapping; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ClampToEdgeWrapping; });
 /* unused harmony export MirroredRepeatWrapping */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return NearestFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return NearestFilter; });
 /* unused harmony export NearestMipMapNearestFilter */
 /* unused harmony export NearestMipMapLinearFilter */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LinearFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LinearFilter; });
 /* unused harmony export LinearMipMapNearestFilter */
 /* unused harmony export LinearMipMapLinearFilter */
 /* unused harmony export UnsignedByteType */
@@ -368,7 +368,7 @@
 /* unused harmony export UnsignedShortType */
 /* unused harmony export IntType */
 /* unused harmony export UnsignedIntType */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FloatType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FloatType; });
 /* unused harmony export HalfFloatType */
 /* unused harmony export UnsignedShort4444Type */
 /* unused harmony export UnsignedShort5551Type */
@@ -44194,7 +44194,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     animate : function(oldt, nowt) {
-        this.update(nowt, (nowt - oldt) * 0.001);
+        this.update(nowt * 0.001, (nowt - oldt) * 0.001);
         requestAnimationFrame(this.animate.bind(this, nowt));
     }
 })();
@@ -44214,41 +44214,50 @@ class Visual {
     constructor() {
 
         //Set Renderer
-        this.rdrr = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderer */]({alpha : false, antialias : true});
+        this.rdrr = new __WEBPACK_IMPORTED_MODULE_0_three__["m" /* WebGLRenderer */]({alpha : false, antialias : true});
         this.rdrr.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.rdrr.domElement);
 
-        this.perlin = new __WEBPACK_IMPORTED_MODULE_1__perlin_perlin_js__["a" /* default */]({ rdrr : this.rdrr , width : 16, height : 16});
+        this.perlin = [];
+        this.perlin.push(new __WEBPACK_IMPORTED_MODULE_1__perlin_perlin_js__["a" /* default */]({ rdrr : this.rdrr , width : 16, height : 16}));
+        this.perlin.push(new __WEBPACK_IMPORTED_MODULE_1__perlin_perlin_js__["a" /* default */]({ rdrr : this.rdrr , width : 16, height : 16}));
 
-        this.seedtex = new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
-            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+        this.seedtex = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
+            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
         });
         
         this.spreadidx = 0;
         this.spreadtex = [];
-        this.spreadtex.push(new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
-            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+        this.spreadtex.push(new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
+            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
         }));
-        this.spreadtex.push(new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
-            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-            data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+        this.spreadtex.push(new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](window.innerWidth, window.innerHeight, {
+            minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+            wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* ClampToEdgeWrapping */],
+            data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
         }));
         
         this.camera = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Camera */]();
         
-
-        this.seedscn = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
-        this.seedscn.add(new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-            new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-            new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* ShaderMaterial */]({
-                uniforms : {
-                    uResolution : { type : "2f", value : [window.innerWidth, window.innerHeight]}
-                },
+        this.seedunif = {
+            uResolution : { type : "2f", value : [window.innerWidth, window.innerHeight]},
+            uTime : { type : "1f", value : 0.0}
+        };
+        this.seedscn = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
+        this.seedscn.add(new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+            new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+            new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* ShaderMaterial */]({
+                uniforms : this.seedunif,
                 transparent : true,
                 vertexShader : `
                 varying vec2 vtex;
@@ -44259,6 +44268,8 @@ class Visual {
                 `,
                 fragmentShader : `
                 uniform vec2 uResolution;
+                uniform float uTime;
+
                 varying vec2 vtex;
 
                 float drawCircle(vec2 uv, vec2 ps, float len) {
@@ -44268,10 +44279,11 @@ class Visual {
                 void main(void) {
                     vec2 st = (vtex - 0.5) * uResolution / max(uResolution.x, uResolution.y);
                     float alpha = 0.0;
-                    alpha += drawCircle(st, vec2( 0.0,  0.0), 0.05);
-                    alpha += drawCircle(st, vec2( 0.1,  0.2), 0.05);
-                    alpha += drawCircle(st, vec2(-0.2,  0.1), 0.05);
-                    alpha += drawCircle(st, vec2( 0.0, -0.2), 0.05);
+                    alpha += drawCircle(st, vec2( 0.10 * sin(uTime * 0.10),  0.10 * cos(uTime * 0.10)), 0.05);
+                    alpha += drawCircle(st, vec2( 0.20 * sin(uTime * 0.12),  0.20 * cos(uTime * 0.12)), 0.02);
+                    alpha += drawCircle(st, vec2( 0.15 * sin(uTime * 0.08),  0.15 * cos(uTime * 0.12)), 0.03);
+                    alpha += drawCircle(st, vec2( 0.10 * sin(uTime * 0.13),  0.05 * cos(uTime * 0.30)), 0.01);
+                    
 
                     gl_FragColor = vec4(1.0, 0.5, 0.5, alpha);
                 }
@@ -44280,16 +44292,17 @@ class Visual {
         ));
 
         this.spreadunif = {
-            uPerlin : { type : "t", value : this.perlin.texture},
+            uPerlinX : { type : "t", value : this.perlin[0].texture},
+            uPerlinY : { type : "t", value : this.perlin[1].texture},
             uSpread : { type : "t", value : this.spreadtex[0].texture},
             uSeed : { type : "t", value : this.seedtex.texture},
             uResolution : { type : "2f", value : [window.innerWidth, window.innerHeight]},
             uTime : { type : "1f", value : 0.0 }
         };
-        this.spreadscn = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
-        this.spreadscn.add(new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-            new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-            new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* ShaderMaterial */]({
+        this.spreadscn = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
+        this.spreadscn.add(new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+            new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+            new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* ShaderMaterial */]({
                 uniforms : this.spreadunif,
                 transparent : true,
                 vertexShader : `
@@ -44303,26 +44316,49 @@ class Visual {
                 #define PI `+ Math.PI + `
                 uniform sampler2D uSeed;
                 uniform sampler2D uSpread;
-                uniform sampler2D uPerlin;
+                
+                uniform sampler2D uPerlinX;
+                uniform sampler2D uPerlinY;
+
                 uniform vec2 uResolution;
 
                 uniform float uTime;
 
                 varying vec2 vtex;
 
+                float blur(vec2 st) {
+                    vec3 offset = vec3(-1.0, 0.0, 1.0);
+                    vec2 res = 1.5/uResolution;
+                    float color = 0.0;
+
+                    color += texture2D(uSpread, st + offset.yy * res).a * 4.0;
+
+                    color += texture2D(uSpread, st + offset.yx * res).a * 2.0;
+                    color += texture2D(uSpread, st + offset.yz * res).a * 2.0;
+                    color += texture2D(uSpread, st + offset.xy * res).a * 2.0;
+                    color += texture2D(uSpread, st + offset.zy * res).a * 2.0;
+
+                    color += texture2D(uSpread, st + offset.xz * res).a * 1.0;
+                    color += texture2D(uSpread, st + offset.zx * res).a * 1.0;
+                    color += texture2D(uSpread, st + offset.xx * res).a * 1.0;
+                    color += texture2D(uSpread, st + offset.zz * res).a * 1.0;
+
+                    return color / 16.0;
+                }
+
                 void main(void) {
-                    float radian = texture2D(uPerlin, vtex).g * PI * 4.0;
+                    vec2 flowed = vec2(
+                        texture2D(uPerlinX, vtex).g - 0.5,
+                        texture2D(uPerlinY, vtex).g - 0.5
+                    );
+                    flowed = 1.0 * flowed / uResolution;
+                    vec2 st = vtex + flowed;
+                    
+                    float oldcolor = blur(st);
+                    oldcolor = oldcolor - (max(0.0005, uTime * oldcolor * 0.1));
+                    float newcolor = texture2D(uSeed, vtex).a;
 
-                    vec2 flowed = 1.0 * vec2( sin(radian), cos(radian)) / uResolution;
-                    float spread = uTime* 0.02;
-
-                    vec2 st = (vtex - 0.5) * (1.0 - spread) + 0.5 + flowed;
-                    vec4 oldcolor = texture2D(uSpread, st);
-                    oldcolor = oldcolor * (1.0 - uTime * oldcolor.a * 2.0);
-                    vec4 newcolor = texture2D(uSeed, vtex);
-
-                    vec4 color = oldcolor + newcolor;//max(newcolor, oldcolor);
-                    color.rgb = vec3(1.0);
+                    vec4 color = vec4(1.0 ,1.0, 1.0, oldcolor + newcolor);
                     gl_FragColor = color;
                 }
                 `
@@ -44332,12 +44368,15 @@ class Visual {
     }
 
     update(t, dt) {
-        this.perlin.update(dt);
+        this.perlin[0].update(dt);
+        this.perlin[1].update(dt);
         // this.perlin.renderForDebug();
+
+        this.seedunif.uTime.value = t;
         this.rdrr.render(this.seedscn, this.camera, this.seedtex);
 
 
-        this.spreadunif.uPerlin.value = this.perlin.texture;
+        // this.spreadunif.uPerlin.value = this.perlin.texture;
         this.spreadunif.uSpread.value = this.spreadtex[this.spreadidx].texture;
         this.spreadunif.uSeed.value = this.seedtex.texture;
         this.spreadunif.uTime.value = dt;
@@ -44370,7 +44409,7 @@ class Perlin {
     option = option || {};
 
     if(option.rdrr == undefined) {
-      this.rdrr = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderer */]({alpha : false});
+      this.rdrr = new __WEBPACK_IMPORTED_MODULE_0_three__["m" /* WebGLRenderer */]({alpha : false});
       this.rdrr.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(this.rdrr.domElement);
     } else { this.rdrr = option.rdrr; }
@@ -44380,16 +44419,16 @@ class Perlin {
     this.flow = new __WEBPACK_IMPORTED_MODULE_2__flow_js__["a" /* default */](this.rdrr, 1024, 1024, this.grid);
 
     this.camera = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Camera */]();
-    this.scene = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
-    this.scene.add(new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-      new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-      new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* MeshBasicMaterial */]({ map : this.flow.getTexture() })
+    this.scene = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
+    this.scene.add(new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+      new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+      new __WEBPACK_IMPORTED_MODULE_0_three__["f" /* MeshBasicMaterial */]({ map : this.flow.getTexture() })
     ));
 
-    this.target = new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](window.innerHeight, window.innerHeight, {
-      minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-      magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-      data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+    this.target = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](window.innerHeight, window.innerHeight, {
+      minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+      magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+      data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
     });
   }
 
@@ -44434,29 +44473,29 @@ class Grid {
     this.width = width == undefined ? 4 : width;
     this.height = height == undefined ? 4 : height;
 
-    this.infoTexture = new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](
+    this.infoTexture = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](
       this.width, this.height , {
-        minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["f" /* NearestFilter */],
-        magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["f" /* NearestFilter */],
-        wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["h" /* RepeatWrapping */],
-        wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["h" /* RepeatWrapping */],
-        data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+        minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["g" /* NearestFilter */],
+        magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["g" /* NearestFilter */],
+        wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["i" /* RepeatWrapping */],
+        wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["i" /* RepeatWrapping */],
+        data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
       }
     );
-    this.tempTexture = new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](
+    this.tempTexture = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](
       this.width, this.height , {
-        minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["f" /* NearestFilter */],
-        magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["f" /* NearestFilter */],
-        wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["h" /* RepeatWrapping */],
-        wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["h" /* RepeatWrapping */],
-        data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */]
+        minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["g" /* NearestFilter */],
+        magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["g" /* NearestFilter */],
+        wrapS : __WEBPACK_IMPORTED_MODULE_0_three__["i" /* RepeatWrapping */],
+        wrapT : __WEBPACK_IMPORTED_MODULE_0_three__["i" /* RepeatWrapping */],
+        data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */]
       }
     );
 
     this.commonCamera = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Camera */]();
 
-    this.tempScene = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
-    this.infoScene = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
+    this.tempScene = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
+    this.infoScene = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
 
     this.uniforms = {
       unif_texture : { type : "t", value : this.infoTexture.texture },
@@ -44464,9 +44503,9 @@ class Grid {
       unif_isinit : { type : "1f", value : 0.0},
       unif_seed : { type : "1f", value : Math.random() }
     };
-    this.tempMesh = new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-      new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-      new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* ShaderMaterial */]({
+    this.tempMesh = new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+      new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+      new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* ShaderMaterial */]({
         uniforms : this.uniforms,
         fragmentShader : `
         uniform sampler2D unif_texture;
@@ -44509,9 +44548,9 @@ class Grid {
         `
       })
     );
-    this.infoMesh = new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-      new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-      new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* MeshBasicMaterial */]({map : this.tempTexture.texture})
+    this.infoMesh = new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+      new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+      new __WEBPACK_IMPORTED_MODULE_0_three__["f" /* MeshBasicMaterial */]({map : this.tempTexture.texture})
     );
 
     this.tempScene.add(this.tempMesh);
@@ -44559,18 +44598,18 @@ class Flow {
     this.rdrr = rdrr;
 
 
-    this.texture = new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* WebGLRenderTarget */](this.width, this.height, {
-      minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-      magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* LinearFilter */],
-      data : __WEBPACK_IMPORTED_MODULE_0_three__["b" /* FloatType */] 
+    this.texture = new __WEBPACK_IMPORTED_MODULE_0_three__["l" /* WebGLRenderTarget */](this.width, this.height, {
+      minFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+      magFilter : __WEBPACK_IMPORTED_MODULE_0_three__["d" /* LinearFilter */],
+      data : __WEBPACK_IMPORTED_MODULE_0_three__["c" /* FloatType */] 
     });
 
     this.camera = new __WEBPACK_IMPORTED_MODULE_0_three__["a" /* Camera */]();
-    this.scene = new __WEBPACK_IMPORTED_MODULE_0_three__["i" /* Scene */]();
+    this.scene = new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* Scene */]();
 
-    this.scene.add(new __WEBPACK_IMPORTED_MODULE_0_three__["d" /* Mesh */](
-      new __WEBPACK_IMPORTED_MODULE_0_three__["g" /* PlaneGeometry */](2.0, 2.0),
-      new __WEBPACK_IMPORTED_MODULE_0_three__["j" /* ShaderMaterial */]({
+    this.scene.add(new __WEBPACK_IMPORTED_MODULE_0_three__["e" /* Mesh */](
+      new __WEBPACK_IMPORTED_MODULE_0_three__["h" /* PlaneGeometry */](2.0, 2.0),
+      new __WEBPACK_IMPORTED_MODULE_0_three__["k" /* ShaderMaterial */]({
         uniforms : {
           unif_texture : { type : "t", value : grid.getTexture()},
           unif_resolution : { type : "2f", value : [ grid.getWidth(), grid.getHeight()] }
